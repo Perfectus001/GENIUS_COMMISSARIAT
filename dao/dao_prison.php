@@ -21,7 +21,7 @@ class PrisonDAO {
             $adresse = $prison->getAdresse();
             $nombreCellules = $prison->getNombreCellules();
             $nombrePlacesParCellule = $prison->getNombrePlacesParCellule();
-            $etat = $prison->getEtat();
+            $etat = 1; // Actif par défaut
 
             $stmt->bindParam(':nom', $nom);
             $stmt->bindParam(':adresse', $adresse);
@@ -46,7 +46,7 @@ class PrisonDAO {
             $prisons = [];
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                if ($row['etat'] == 0) { // Afficher seulement les prisons non supprimées
+                if ($row['etat'] == 1) { // Afficher seulement les prisons actives
                     $prison = new Prison();
                     $prison->setCode($row['code']);
                     $prison->setNom($row['nom']);
@@ -91,7 +91,7 @@ class PrisonDAO {
 
     public function supprimerPrison($code) {
         try {
-            $query = "UPDATE prison SET etat=1 WHERE code=:code";
+            $query = "UPDATE prison SET etat=0 WHERE code=:code";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':code', $code);
             return $stmt->execute();

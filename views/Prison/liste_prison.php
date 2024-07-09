@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/../../controllers/prison_controller.php');
+require_once(__DIR__ . '/../../controllers/Prison_controller.php');
 
 $controller = new PrisonController();
 $prisons = $controller->listerPrisons();
@@ -31,7 +31,7 @@ $prisons = $controller->listerPrisons();
         <tbody>
             <?php if (count($prisons) > 0): ?>
                 <?php foreach ($prisons as $prison): ?>
-                    <?php if ($prison->getEtat() == 0): // Afficher seulement les prisons non supprimées ?>
+                    <?php if ($prison->getEtat() == 1): // Afficher seulement les prisons non supprimées ?>
                         <tr>
                             <td><?php echo htmlspecialchars($prison->getCode()); ?></td>
                             <td><?php echo htmlspecialchars($prison->getNom()); ?></td>
