@@ -6,7 +6,7 @@
     <title>Enregistrer Detenu</title>
 </head>
 <body>
-    <form method="post" action="../controllers/detenuController.php">
+    <form method="post" action="../../controllers/detenuController.php">
         <div>
             <label for="nom">NOM</label>
             <input type="text" name="nom" id="nom" value="<?php echo isset($_GET['nom']) ? htmlspecialchars($_GET['nom']) : ''; ?>">
@@ -53,16 +53,15 @@
             </select>
             <br><?php if (isset($_GET['error_infraction'])) echo "<p style='color: red;'>".$_GET['error_infraction']."</p>"; ?>
         </div>
-        <div>
+        <!--<div>
             <label for="statut">STATUT</label>
             <select name="statut" id="statut">
                 <option value="liberer">LIBERER</option>
                 <option value="incarcerer">INCARCERER</option>
             </select>
-            <input type="text" name="statut" id="statut">
-            <br><?php if (isset($_GET['error_statut'])) echo "<p style='color: red;'>".$_GET['error_statut']."</p>"; ?>
-        </div>
-        <div><input type="submit" value="Envoyer"></div>
+            <br><?php // if (isset($_GET['error_statut'])) echo "<p style='color: red;'>".$_GET['error_statut']."</p>"; ?>
+        </div>-->
+        <div><input type="submit" value="Enregistrer" name="sub"></div>
     </form>
 </body>
 </html>
