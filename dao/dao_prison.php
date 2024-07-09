@@ -100,6 +100,36 @@ class PrisonDAO {
             return false;
         }
     }
+
+    public function rechercherPrisons($code) {
+        try {
+            $query = "SELECT * FROM prison WHERE etat=1 AND code=:code";
+            
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':code', $code);
+            $prison = null;
+
+            $stmt->execute();
+
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($row) {
+                $prison = new Prison();
+                $prison->setCode($row['code']);
+                $prison->setNom($row['nom']);
+                $prison->setAdresse($row['adresse']);
+                $prison->setNombreCellules($row['nombreCellules']);
+                $prison->setNombrePlacesParCellule($row['nombrePlacesParCellule']);
+                $prison->setEtat($row['etat']);
+                return $prison;
+            }
+
+        } catch (PDOException $e) {
+            echo "Erreur lors de la récupération des prisons : " . $e->getMessage();
+        }
+        return null;
+    }
+
 }
 
 ?>

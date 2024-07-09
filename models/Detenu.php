@@ -16,9 +16,9 @@
         private $etat;
 
         //Constructeur
-        public function __construct($code, $nom, $prenom, $cin_nif, $sexe, $adresse, $telephone, $infraction, $statut, $dateArrestation, $codePrison)
+        public function __construct(/*$code, $nom, $prenom, $cin_nif, $sexe, $adresse, $telephone, $infraction, $statut, $dateArrestation, $codePrison*/)
         {
-            $this->code = $code;
+           /* $this->code = $code;
             $this->nom = $nom;
             $this->prenom = $prenom;
             $this->cin_nif = $cin_nif;
@@ -28,7 +28,7 @@
             $this->infraction = $infraction;
             $this->statut = $statut;
             $this->dateArrestation = $dateArrestation;
-            $this->codePrison = $codePrison;
+            $this->codePrison = $codePrison;*/
         }
 
 
@@ -109,7 +109,7 @@
             return $this->codePrison;
         }
 
-        public function setIdPrison($codePrison){
+        public function setCodePrison($codePrison){
             $this->codePrison = $codePrison;
         }
 
