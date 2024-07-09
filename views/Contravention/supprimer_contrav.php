@@ -1,9 +1,12 @@
 <?php
-require_once(__DIR__ .'/../../controllers/ContraventionController.php');
+require_once(__DIR__ . '/../controllers/ContraventionController.php');
 
-$controller = new ContraventionController();
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $controller->delete();
+$message = "";
+$code = $_GET['code'] ?? null;
+
+if ($code !== null) {
+    $controller = new ContraventionController();
+    $message = $controller->delete($code);
 }
 ?>
 
@@ -13,11 +16,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Supprimer une contravention</title>
 </head>
 <body>
-    <h2>Supprimer une contravention</h2>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        Code: <input type="text" name="code" required><br>
-        <input type="submit" value="Supprimer">
-    </form>
+    <h1>Supprimer une contravention</h1>
+    <?php if (!empty($message)): ?>
+        <p><?php echo htmlspecialchars($message); ?></p>
+        <a href="afficher_contravention.php">Retour à la liste des contraventions</a>
+    <?php else: ?>
+        <p>Aucune contravention sélectionnée.</p>
+    <?php endif; ?>
 </body>
 </html>
-9/*
