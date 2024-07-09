@@ -1,0 +1,55 @@
+ 
+/* Styles spécifiques pour l'impression */
+.print-container {
+    width: 90%;
+    padding: 20px;
+    margin: 0 auto; /* Centre le contenu horizontalement */
+}
+
+.print-header, h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.print-header img {
+    width: 100px;
+    height: auto;
+}
+
+.print-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.print-details .detail-item {
+    width: 30%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.print-button {
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 20px;
+    color: #007bff; /* Couleur du texte bleue */
+    background-color: #f0f0f0; /* Couleur de fond du bouton */
+    border: 1px solid #ddd; /* Bordure du bouton */
+    padding: 10px 20px; /* Espacement interne */
+    border-radius: 5px; /* Arrondi des bords */
+    cursor: pointer; /* Pointeur de la souris */
+    transition: background-color 0.3s, color 0.3s; /* Transition pour l'effet hover */
+}
+
+.print-button:hover {
+    background-color: #e0e0e0; /* Couleur de fond lors du survol */
+    color: #0056b3; /* Couleur du texte lors du survol */
+}
+
+@media print {
+    .print-button {
+        display: none;
+    }
+}
+ 

@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/../controllers/prison_controller.php');
+require_once(__DIR__ . '/../../controllers/prison_controller.php');
 
 $controller = new PrisonController();
 

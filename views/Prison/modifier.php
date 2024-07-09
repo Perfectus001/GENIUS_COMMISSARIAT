@@ -1,17 +1,23 @@
 <?php
-require_once(__DIR__ . '/../controllers/prison_controller.php');
+require_once(__DIR__ . '/../../controllers/prison_controller.php');
 
 $controller = new PrisonController();
 
 if (isset($_GET['code'])) {
     $code = $_GET['code'];
-    $prison = $controller->listerPrisons();
+    $prisons = $controller->listerPrisons();
+    $currentPrison = null;
 
-    foreach ($prison as $p) {
-        if ($p->getCode() == $code) {
+    foreach ($prisons as $p) {
+        if ($p->getCode() == $code && $p->getEtat() == 0) { // Vérifie que l'état est 0
             $currentPrison = $p;
             break;
         }
+    }
+
+    if ($currentPrison === null) {
+        echo "<p>Code de prison invalide ou prison supprimée.</p>";
+        exit;
     }
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
