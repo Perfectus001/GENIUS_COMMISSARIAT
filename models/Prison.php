@@ -56,6 +56,11 @@ class Prison {
     public function setEtat($etat) {
         $this->etat = $etat;
     }
-}
 
+    // Implémentation de la méthode __toString
+    public function __toString() {
+        return "Prison [Code: $this->code, Nom: $this->nom, Adresse: $this->adresse, Nombre de Cellules: $this->nombreCellules, Nombre de Places par Cellule: $this->nombrePlacesParCellule, Etat: $this->etat]";
+    }
+
+}
 ?>
