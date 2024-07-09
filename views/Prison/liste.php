@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/../controllers/prison_controller.php');
+require_once(__DIR__ . '/../../controllers/prison_controller.php');
 
 $controller = new PrisonController();
 $prisons = $controller->listerPrisons();
@@ -24,7 +24,6 @@ $prisons = $controller->listerPrisons();
     </style>
 </head>
 <body>
-<a href="modifier_prison.php">  modifier prison </a>
     <h1>Liste des Prisons</h1>
     <table>
         <thead>
@@ -48,8 +47,8 @@ $prisons = $controller->listerPrisons();
                             <td><?php echo htmlspecialchars($prison->getNombreCellules()); ?></td>
                             <td><?php echo htmlspecialchars($prison->getNombrePlacesParCellule()); ?></td>
                             <td>
-                                <a href="modifier_prison.php?code=<?php echo htmlspecialchars($prison->getCode()); ?>">Modifier</a> |
-                                <a href="delete_prison.php?code=<?php echo htmlspecialchars($prison->getCode()); ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette prison ?');">Supprimer</a>
+                                <a href="modifier.php">Modifier</a> |
+                                <a href="suprimer.php?code=<?php echo htmlspecialchars($prison->getCode()); ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette prison ?');">Supprimer</a>
                             </td>
                         </tr>
                     <?php endif; ?>

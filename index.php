@@ -7,6 +7,9 @@
  </head>
  <body>
     <a href="./views/add_prison.php"> ajouter un prison </a>
-    <a href="./views/liste_prison.php"> ajouter un prison </a>
+    <a href="./views/liste_prison.php"> liste des prison </a>
+    <a href="./views/Authentifier/login.php"> login </a>
+    <a href="./views/Authentifier/signup.php"> signup </a>
+    <a href="./views/Autorisation/add_autorisation.php"> ajouter  une autorisation </a>
  </body>
  </html>
