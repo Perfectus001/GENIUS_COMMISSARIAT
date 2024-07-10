@@ -64,7 +64,7 @@
                     <br><br>
                     <a href="modifier_detenu.php?detenu<?= $queryString ?>">Modifier</a> || 
                     <a href="../../controllers/detenuController.php?choix=sup&code=<?= $detenu->getCode() ?>">Supprimer</a> || 
-                    <a href="modifier_detenu.php?detenu=<?= $queryString ?>">Transfert</a> || 
+                    <a href="transferer_detenu.php?detenu=<?= $queryString ?>">Transfert</a> || 
                     <a href="../../controllers/detenuController.php?&choix=lib&code=<?= $detenu->getCode() ?>">Liberer</a> 
                 <?php
             }

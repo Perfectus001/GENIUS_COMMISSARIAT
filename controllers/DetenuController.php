@@ -315,7 +315,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if(!empty($errors)) {
                 $query = http_build_query(array_merge($errors, $values));
-                header("Location: ../views/detenu/modifier_detenu.php?$query");
+                header("Location: ../views/detenu/transferer_detenu.php?$query");
                 exit();
             } else {
 
