@@ -1,78 +1,165 @@
-<?php
-require_once(__DIR__ . '/../controllers/ContraventionController.php');
-
-$controller = new ContraventionController();
-$contraventions = $controller->read();
-?>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Liste des contraventions</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afficher Contravention</title>
     <style>
         table {
             width: 100%;
             border-collapse: collapse;
         }
+
         table, th, td {
             border: 1px solid black;
         }
+
         th, td {
             padding: 10px;
             text-align: left;
         }
     </style>
 </head>
+
 <body>
-    <h1>Liste des contraventions</h1>
-    <?php if ($contraventions === null): ?>
-        <p>Erreur lors de la récupération des contraventions.</p>
-    <?php else: ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>Code</th>
-                    <th>Nom Propriétaire</th>
-                    <th>No. Permis</th>
-                    <th>No. Plaque</th>
-                    <th>Lieu de contravention</th>
-                    <th>No. Violation</th>
-                    <th>Article</th>
-                    <th>Date</th>
-                    <th>Heure</th>
-                    <th>No. Agent</th>
-                    <th>No. Matricule</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (count($contraventions) > 0): ?>
-                    <?php foreach ($contraventions as $contravention): ?>
+    <form action="" method="post">
+        <div>
+            <label for="idContravention">Id Contravention</label>
+            <input type="text" id="idContravention" name="idContravention" />
+        </div>
+        <div>
+            <input type="submit" value="Recherche">
+        </div>
+    </form>
+    <?php
+    require_once(__DIR__ . '/../../dao/ContraventionDao.php');
+    $contraventionDao = new ContraventionDao();
+    $contraventions = $contraventionDao->displayAll();
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (!isset($_POST['idContravention']) || empty(trim($_POST['idContravention']))) {
+    ?>
+            <p style='color: red;'>Le champ est requis</p>
+
+            <?php
+        } else {
+            $id = htmlspecialchars(trim($_POST['idContravention']));
+            $contrav = $contraventionDao->search($id);
+            if ($contrav == null) {
+                if ((count($contraventions) > 0) && $contraventions != null) { ?>
+                    <h1>Liste des Contraventions</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Infraction</th>
+                                <th>Date</th>
+                                <th>Statut</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($contraventions as $contravention) {
+                            $date = new DateTime($contravention->getDate());
+                            $dateSimple = $date->format('d-m-Y');
+                            echo "<tr>";
+                            echo "<td>" . $contravention->getCode() . "</td>";
+                            echo "<td>" . $contravention->getNom() . "</td>";
+                            echo "<td>" . $contravention->getPrenom() . "</td>";
+                            echo "<td>" . $contravention->getInfraction() . "</td>";
+                            echo "<td>" . $dateSimple . "</td>";
+                            echo "<td>" . $contravention->getStatut() . "</td>";
+                            echo "<td><a href=rechercher_contrav.php?code=" . htmlspecialchars($contravention->getCode()) . ">Plus</a></td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<p>Aucune contravention n'est enregistrée</p>";
+                    }
+                        ?>
+                        </tbody>
+                    </table>
+                <?php
+            } else {
+                if($contrav->getCode() != null){
+                ?>
+                    <h1>Liste des Contraventions</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Infraction</th>
+                                <th>Date</th>
+                                <th>Statut</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $date = new DateTime($contrav->getDate());
+                            $dateSimple = $date->format('d-m-Y');
+                            echo "<tr>";
+                            echo "<td>" . $contrav->getCode() . "</td>";
+                            echo "<td>" . $contrav->getNom() . "</td>";
+                            echo "<td>" . $contrav->getPrenom() . "</td>";
+                            echo "<td>" . $contrav->getInfraction() . "</td>";
+                            echo "<td>" . $dateSimple . "</td>";
+                            echo "<td>" . $contrav->getStatut() . "</td>";
+                            echo "<td><a href=rechercher_contrav.php?code=" . htmlspecialchars($contrav->getCode()) . ">Plus</a></td>";
+                            echo "</tr>";
+                            ?>
+                        </tbody>
+                    </table>
+            <?php
+            }else{
+                echo "<p style='color: red;'>Numéro de contravention introuvable</p>";
+            }
+        }
+        }
+    } else {
+            ?>
+            <?php
+            if ((count($contraventions) > 0) && $contraventions != null) { ?>
+                <h1>Liste des Contraventions</h1>
+                <table>
+                    <thead>
                         <tr>
-                            <td><?php echo htmlspecialchars($contravention['code']); ?></td>
-                            <td><?php echo htmlspecialchars($contravention['nomProprio']); ?></td>
-                            <td><?php echo htmlspecialchars($contravention['noPermit']); ?></td>
-                            <td><?php echo htmlspecialchars($contravention['noPlaque']); ?></td>
-                            <td><?php echo htmlspecialchars($contravention['lieuContrav']); ?></td>
-                            <td><?php echo htmlspecialchars($contravention['noViolation']); ?></td>
-                            <td><?php echo htmlspecialchars($contravention['article']); ?></td>
-                            <td><?php echo htmlspecialchars($contravention['date']); ?></td>
-                            <td><?php echo htmlspecialchars($contravention['heure']); ?></td>
-                            <td><?php echo htmlspecialchars($contravention['noAgent']); ?></td>
-                            <td><?php echo htmlspecialchars($contravention['noMatricule']); ?></td>
-                            <td>
-                                <a href="modifier_contravention.php?code=<?php echo htmlspecialchars($contravention['code']); ?>">Modifier</a> |
-                                <a href="delete_contravention.php?code=<?php echo htmlspecialchars($contravention['code']); ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette contravention ?');">Supprimer</a>
-                            </td>
+                            <th>Code</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Infraction</th>
+                            <th>Date</th>
+                            <th>Statut</th>
+                            <th>Action</th>
                         </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <tr>
-                        <td colspan="12">Aucune contravention enregistrée.</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
-    <?php endif; ?>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($contraventions as $contravention) {
+                            $date = new DateTime($contravention->getDate());
+                            $dateSimple = $date->format('d-m-Y');
+                            echo "<tr>";
+                            echo "<td>" . $contravention->getCode() . "</td>";
+                            echo "<td>" . $contravention->getNom() . "</td>";
+                            echo "<td>" . $contravention->getPrenom() . "</td>";
+                            echo "<td>" . $contravention->getInfraction() . "</td>";
+                            echo "<td>" . $dateSimple . "</td>";
+                            echo "<td>" . $contravention->getStatut() . "</td>";
+                            echo "<td><a href=rechercher_contrav.php?code=" . htmlspecialchars($contravention->getCode()) . ">Plus</a></td>";
+                            echo "</tr>";
+                        }
+                    } else { ?>
+                        <p>Aucune contravention n'est enregistrée</p>;
+                    <?php
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            <?php } ?>
 </body>
+
 </html>

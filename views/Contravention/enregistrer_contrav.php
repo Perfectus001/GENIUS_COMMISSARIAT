@@ -1,49 +1,63 @@
-<?php
-require_once(__DIR__ . '/../controllers/ContraventionController.php');
-require_once(__DIR__ . '/../models/Contravention.php');
-
-$message = "";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $contravention = new Contravention();
-    $contravention->setNomProprio($_POST['nomProprio']);
-    $contravention->setNoPermit($_POST['noPermit']);
-    $contravention->setNoPlaque($_POST['noPlaque']);
-    $contravention->setLieuContrav($_POST['lieuContrav']);
-    $contravention->setNoViolation($_POST['noViolation']);
-    $contravention->setArticle($_POST['article']);
-    $contravention->setDate($_POST['date']);
-    $contravention->setHeure($_POST['heure']);
-    $contravention->setNoAgent($_POST['noAgent']);
-    $contravention->setNoMatricule($_POST['noMatricule']);
-
-    $controller = new ContraventionController();
-    $message = $controller->create($contravention);
-}
-?>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Enregistrer une contravention</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enregistrer Contravention</title>
 </head>
 <body>
-    <h1>Enregistrer une contravention</h1>
-    <?php if (!empty($message)): ?>
-        <p><?php echo htmlspecialchars($message); ?></p>
-    <?php endif; ?>
-    <form method="post" action="">
-        <input type="text" name="nomProprio" placeholder="Nom Propriétaire" required><br>
-        <input type="text" name="noPermit" placeholder="No. Permis" required><br>
-        <input type="text" name="noPlaque" placeholder="No. Plaque" required><br>
-        <input type="text" name="lieuContrav" placeholder="Lieu de contravention" required><br>
-        <input type="text" name="noViolation" placeholder="No. Violation" required><br>
-        <input type="text" name="article" placeholder="Article" required><br>
-        <input type="date" name="date" required><br>
-        <input type="time" name="heure" required><br>
-        <input type="text" name="noAgent" placeholder="No. Agent" required><br>
-        <input type="text" name="noMatricule" placeholder="No. Matricule" required><br>
-        <button type="submit">Enregistrer</button>
+    <form method="post" action="../../controllers/contraventionController.php">
+        <div>
+            <label for="nomProprio">Nom Propriétaire</label>
+            <input type="text" name="nomProprio" id="nomProprio" value="<?php echo isset($_GET['nomProprio']) ? htmlspecialchars($_GET['nomProprio']) : ''; ?>">
+            <br><?php if (isset($_GET['error_nomProprio'])) echo "<p style='color: red;'>".$_GET['error_nomProprio']."</p>"; ?>
+        </div>
+        <div>
+            <label for="noPermit">Numéro de Permis</label>
+            <input type="text" name="noPermit" id="noPermit" value="<?php echo isset($_GET['noPermit']) ? htmlspecialchars($_GET['noPermit']) : ''; ?>">
+            <br><?php if (isset($_GET['error_noPermit'])) echo "<p style='color: red;'>".$_GET['error_noPermit']."</p>"; ?>
+        </div>
+        <div>
+            <label for="noPlaque">Numéro de Plaque</label>
+            <input type="text" name="noPlaque" id="noPlaque" value="<?php echo isset($_GET['noPlaque']) ? htmlspecialchars($_GET['noPlaque']) : ''; ?>">
+            <br><?php if (isset($_GET['error_noPlaque'])) echo "<p style='color: red;'>".$_GET['error_noPlaque']."</p>"; ?>
+        </div>
+        <div>
+            <label for="lieuContrav">Lieu de la Contravention</label>
+            <input type="text" name="lieuContrav" id="lieuContrav" value="<?php echo isset($_GET['lieuContrav']) ? htmlspecialchars($_GET['lieuContrav']) : ''; ?>">
+            <br><?php if (isset($_GET['error_lieuContrav'])) echo "<p style='color: red;'>".$_GET['error_lieuContrav']."</p>"; ?>
+        </div>
+        <div>
+            <label for="noViolation">Numéro de Violation</label>
+            <input type="text" name="noViolation" id="noViolation" value="<?php echo isset($_GET['noViolation']) ? htmlspecialchars($_GET['noViolation']) : ''; ?>">
+            <br><?php if (isset($_GET['error_noViolation'])) echo "<p style='color: red;'>".$_GET['error_noViolation']."</p>"; ?>
+        </div>
+        <div>
+            <label for="article">Article</label>
+            <input type="text" name="article" id="article" value="<?php echo isset($_GET['article']) ? htmlspecialchars($_GET['article']) : ''; ?>">
+            <br><?php if (isset($_GET['error_article'])) echo "<p style='color: red;'>".$_GET['error_article']."</p>"; ?>
+        </div>
+        <div>
+            <label for="date">Date</label>
+            <input type="date" name="date" id="date" value="<?php echo isset($_GET['date']) ? htmlspecialchars($_GET['date']) : ''; ?>">
+            <br><?php if (isset($_GET['error_date'])) echo "<p style='color: red;'>".$_GET['error_date']."</p>"; ?>
+        </div>
+        <div>
+            <label for="heure">Heure</label>
+            <input type="time" name="heure" id="heure" value="<?php echo isset($_GET['heure']) ? htmlspecialchars($_GET['heure']) : ''; ?>">
+            <br><?php if (isset($_GET['error_heure'])) echo "<p style='color: red;'>".$_GET['error_heure']."</p>"; ?>
+        </div>
+        <div>
+            <label for="noAgent">Numéro d'Agent</label>
+            <input type="text" name="noAgent" id="noAgent" value="<?php echo isset($_GET['noAgent']) ? htmlspecialchars($_GET['noAgent']) : ''; ?>">
+            <br><?php if (isset($_GET['error_noAgent'])) echo "<p style='color: red;'>".$_GET['error_noAgent']."</p>"; ?>
+        </div>
+        <div>
+            <label for="noMatricule">Numéro de Matricule</label>
+            <input type="text" name="noMatricule" id="noMatricule" value="<?php echo isset($_GET['noMatricule']) ? htmlspecialchars($_GET['noMatricule']) : ''; ?>">
+            <br><?php if (isset($_GET['error_noMatricule'])) echo "<p style='color: red;'>".$_GET['error_noMatricule']."</p>"; ?>
+        </div>
+        <div><input type="submit" value="Enregistrer" name="sub"></div>
     </form>
 </body>
 </html>

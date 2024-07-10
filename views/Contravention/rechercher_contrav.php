@@ -1,46 +1,60 @@
-<?php
-require_once(__DIR__ . '/../controllers/ContraventionController.php');
-
-$error = "";
-$contravention = null;
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $code = $_POST['code'];
-    $controller = new ContraventionController();
-    $contravention = $controller->readOne($code);
-    if ($contravention === null) {
-        $error = "Contravention non trouvée.";
-    }
-}
-?>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Rechercher une contravention</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rechercher Contravention</title>
 </head>
 <body>
-    <h1>Rechercher une contravention</h1>
-    <?php if (!empty($error)): ?>
-        <p><?php echo htmlspecialchars($error); ?></p>
-    <?php endif; ?>
-    <form method="post" action="">
-        <input type="text" name="code" placeholder="Code de la contravention" required>
-        <button type="submit">Rechercher</button>
-    </form>
-    <?php if ($contravention !== null): ?>
-        <h2>Résultats de la recherche :</h2>
-        <p>Code : <?php echo htmlspecialchars($contravention->getCode()); ?></p>
-        <p>Nom Propriétaire : <?php echo htmlspecialchars($contravention->getNomProprio()); ?></p>
-        <p>No. Permis : <?php echo htmlspecialchars($contravention->getNoPermit()); ?></p>
-        <p>No. Plaque : <?php echo htmlspecialchars($contravention->getNoPlaque()); ?></p>
-        <p>Lieu de contravention : <?php echo htmlspecialchars($contravention->getLieuContrav()); ?></p>
-        <p>No. Violation : <?php echo htmlspecialchars($contravention->getNoViolation()); ?></p>
-        <p>Article : <?php echo htmlspecialchars($contravention->getArticle()); ?></p>
-        <p>Date : <?php echo htmlspecialchars($contravention->getDate()); ?></p>
-        <p>Heure : <?php echo htmlspecialchars($contravention->getHeure()); ?></p>
-        <p>No. Agent : <?php echo htmlspecialchars($contravention->getNoAgent()); ?></p>
-        <p>No. Matricule : <?php echo htmlspecialchars($contravention->getNoMatricule()); ?></p>
-    <?php endif; ?>
+    <?php
+        require_once(__DIR__ . '/../../dao/ContraventionDao.php');
+        $contraventionDao = new ContraventionDao();
+
+        if (isset($_GET['noViolation'])) {
+            $noViolation = $_GET['noViolation'];
+
+            $contravention = $contraventionDao->search($noViolation);
+
+            if ($contravention == null) {
+                echo "Contravention introuvable";
+            } else {
+                ?>
+                <p>Nom Propriétaire: <?= $contravention->getNomProprio() ?> </p>
+                <p>Numéro de Permis: <?= $contravention->getNoPermit() ?> </p>
+                <p>Numéro de Plaque: <?= $contravention->getNoPlaque() ?> </p>
+                <p>Lieu de la Contravention: <?= $contravention->getLieuContrav() ?> </p>
+                <p>Numéro de Violation: <?= $contravention->getNoViolation() ?> </p>
+                <p>Article: <?= $contravention->getArticle() ?> </p>
+                <p>Date: <?= $contravention->getDate() ?> </p>
+                <p>Heure: <?= $contravention->getHeure() ?> </p>
+                <p>Numéro d'Agent: <?= $contravention->getNoAgent() ?> </p>
+                <p>Numéro de Matricule: <?= $contravention->getNoMatricule() ?> </p>
+                <?php 
+
+                $contravArray = [
+                    'nomProprio'=> $contravention->getNomProprio(),
+                    'noPermit'=> $contravention->getNoPermit(),
+                    'noPlaque'=> $contravention->getNoPlaque(),
+                    'lieuContrav'=> $contravention->getLieuContrav(),
+                    'noViolation'=> $contravention->getNoViolation(),
+                    'article'=> $contravention->getArticle(),
+                    'date'=> $contravention->getDate(),
+                    'heure'=> $contravention->getHeure(),
+                    'noAgent'=> $contravention->getNoAgent(),
+                    'noMatricule'=> $contravention->getNoMatricule(),
+                ];
+
+                $queryString = http_build_query(['contravention' => $contravArray]);
+                ?>
+
+                <br><br>
+                <a href="modifier_contrav.php?contravention=<?= $queryString ?>">Modifier</a> || 
+                <a href="../../controllers/contraventionController.php?choix=sup&noViolation=<?= $contravention->getNoViolation() ?>">Supprimer</a> || 
+                <a href="modifier_contrav.php?contravention=<?= $queryString ?>">Transfert</a> || 
+                <a href="../../controllers/contraventionController.php?choix=lib&noViolation=<?= $contravention->getNoViolation() ?>">Liberer</a> 
+                <?php
+            }
+        }
+    ?>
 </body>
 </html>
