@@ -1,51 +1,49 @@
 <?php
-require_once(__DIR__ .'/../../controllers/ContraventionController.php');
+require_once(__DIR__ . '/../controllers/ContraventionController.php');
+require_once(__DIR__ . '/../models/Contravention.php');
 
-$controller = new ContraventionController();
+$message = "";
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $contraventionData = [
-        'nomProprio' => $_POST['nomProprio'],
-        'noPermit' => $_POST['noPermit'],
-        'noPlaque' => $_POST['noPlaque'],
-        'lieuContrav' => $_POST['lieuContrav'],
-        'noViolation' => $_POST['noViolation'],
-        'article' => $_POST['article'],
-        'date' => $_POST['date'],
-        'heure' => $_POST['heure'],
-        'noAgent' => $_POST['noAgent'],
-        'noMatricule' => $_POST['noMatricule']
-    ];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $contravention = new Contravention();
+    $contravention->setNomProprio($_POST['nomProprio']);
+    $contravention->setNoPermit($_POST['noPermit']);
+    $contravention->setNoPlaque($_POST['noPlaque']);
+    $contravention->setLieuContrav($_POST['lieuContrav']);
+    $contravention->setNoViolation($_POST['noViolation']);
+    $contravention->setArticle($_POST['article']);
+    $contravention->setDate($_POST['date']);
+    $contravention->setHeure($_POST['heure']);
+    $contravention->setNoAgent($_POST['noAgent']);
+    $contravention->setNoMatricule($_POST['noMatricule']);
 
-    $success = $controller->create($contraventionData);
-
-    if ($success) {
-        echo "<p>Contravention enregistrée avec succès !</p>";
-    } else {
-        echo "<p>Erreur lors de l'enregistrement de la contravention.</p>";
-    }
+    $controller = new ContraventionController();
+    $message = $controller->create($contravention);
 }
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ajouter une contravention</title>
+    <title>Enregistrer une contravention</title>
 </head>
 <body>
-    <h2>Ajouter une contravention</h2>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        Nom Propriétaire: <input type="text" name="nomProprio" required><br>
-        No. Permis: <input type="text" name="noPermit" required><br>
-        No. Plaque: <input type="text" name="noPlaque" required><br>
-        Lieu de contravention: <input type="text" name="lieuContrav" required><br>
-        No. Violation: <input type="text" name="noViolation" required><br>
-        Article: <input type="text" name="article" required><br>
-        Date: <input type="date" name="date" required><br>
-        Heure: <input type="time" name="heure" required><br>
-        No. Agent: <input type="text" name="noAgent" required><br>
-        No. Matricule: <input type="text" name="noMatricule" required><br>
-        <input type="submit" value="Enregistrer">
+    <h1>Enregistrer une contravention</h1>
+    <?php if (!empty($message)): ?>
+        <p><?php echo htmlspecialchars($message); ?></p>
+    <?php endif; ?>
+    <form method="post" action="">
+        <input type="text" name="nomProprio" placeholder="Nom Propriétaire" required><br>
+        <input type="text" name="noPermit" placeholder="No. Permis" required><br>
+        <input type="text" name="noPlaque" placeholder="No. Plaque" required><br>
+        <input type="text" name="lieuContrav" placeholder="Lieu de contravention" required><br>
+        <input type="text" name="noViolation" placeholder="No. Violation" required><br>
+        <input type="text" name="article" placeholder="Article" required><br>
+        <input type="date" name="date" required><br>
+        <input type="time" name="heure" required><br>
+        <input type="text" name="noAgent" placeholder="No. Agent" required><br>
+        <input type="text" name="noMatricule" placeholder="No. Matricule" required><br>
+        <button type="submit">Enregistrer</button>
     </form>
 </body>
 </html>

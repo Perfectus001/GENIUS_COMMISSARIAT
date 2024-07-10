@@ -18,7 +18,7 @@ class PrisonController {
             $prison->setAdresse($prisonData['adresse']);
             $prison->setNombreCellules($prisonData['nombreCellules']);
             $prison->setNombrePlacesParCellule($prisonData['nombrePlacesParCellule']);
-            $prison->setEtat(0);
+            $prison->setEtat(1); // Actif par défaut
 
             if ($this->prisonDAO->ajouterPrison($prison)) {
                 // Redirection vers la liste des prisons après l'ajout
@@ -89,5 +89,6 @@ class PrisonController {
         }
     }
 }
+
 
 ?>
