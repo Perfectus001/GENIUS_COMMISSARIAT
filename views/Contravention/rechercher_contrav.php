@@ -10,10 +10,10 @@
         require_once(__DIR__ . '/../../dao/ContraventionDao.php');
         $contraventionDao = new ContraventionDao();
 
-        if (isset($_GET['noViolation'])) {
-            $noViolation = $_GET['noViolation'];
+        if (isset($_GET['code'])) {
+            $code= $_GET['code'];
 
-            $contravention = $contraventionDao->search($noViolation);
+            $contravention = $contraventionDao->search($code);
 
             if ($contravention == null) {
                 echo "Contravention introuvable";
@@ -32,6 +32,8 @@
                 <?php 
 
                 $contravArray = [
+                    ''=>'',
+                    'idContrav' => $contravention->getCode(),
                     'nomProprio'=> $contravention->getNomProprio(),
                     'noPermit'=> $contravention->getNoPermit(),
                     'noPlaque'=> $contravention->getNoPlaque(),

@@ -132,9 +132,6 @@
                     </table>
             <?php
             }else{
-<<<<<<< HEAD
-                echo "<p style='color: red;'>Numéro de contravention introuvable</p>";
-=======
                 ?>
                 <p>NOM: <?= $detenu->getNom() ?> </p>
                 <p>PRENOM: <?= $detenu->getPreNom() ?> </p>
@@ -184,7 +181,6 @@
                     <a href="transferer_detenu.php?detenu=<?= $queryString ?>">Transfert</a> || 
                     <a href="../../controllers/detenuController.php?&choix=lib&code=<?= $detenu->getCode() ?>">Liberer</a> 
                 <?php
->>>>>>> e846ee4a112877f28f99c174b25232fd4d91e8e5
             }
         }
         }

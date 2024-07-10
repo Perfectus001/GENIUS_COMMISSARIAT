@@ -6,7 +6,7 @@
     <title>Enregistrer Contravention</title>
 </head>
 <body>
-    <form method="post" action="../../controllers/contraventionController.php">
+    <form method="post" action="../../controllers/ContraventionController.php">
         <div>
             <label for="nomProprio">Nom Propriétaire</label>
             <input type="text" name="nomProprio" id="nomProprio" value="<?php echo isset($_GET['nomProprio']) ? htmlspecialchars($_GET['nomProprio']) : ''; ?>">

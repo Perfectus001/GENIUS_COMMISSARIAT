@@ -11,11 +11,14 @@
             border-collapse: collapse;
         }
 
-        table, th, td {
+        table,
+        th,
+        td {
             border: 1px solid black;
         }
 
-        th, td {
+        th,
+        td {
             padding: 10px;
             text-align: left;
         }
@@ -53,10 +56,10 @@
                             <tr>
                                 <th>Code</th>
                                 <th>Nom</th>
-                                <th>Prénom</th>
-                                <th>Infraction</th>
-                                <th>Date</th>
-                                <th>Statut</th>
+                                <th>No. Permit</th>
+                                <th>No. Plaque</th>
+                                <th>Lieu</th>
+                                <th>No. Violation</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -67,11 +70,11 @@
                             $dateSimple = $date->format('d-m-Y');
                             echo "<tr>";
                             echo "<td>" . $contravention->getCode() . "</td>";
-                            echo "<td>" . $contravention->getNom() . "</td>";
-                            echo "<td>" . $contravention->getPrenom() . "</td>";
-                            echo "<td>" . $contravention->getInfraction() . "</td>";
-                            echo "<td>" . $dateSimple . "</td>";
-                            echo "<td>" . $contravention->getStatut() . "</td>";
+                            echo "<td>" . $contravention->getNomProprio() . "</td>";
+                            echo "<td>" . $contravention->getNoPermit() . "</td>";
+                            echo "<td>" . $contravention->getNoPlaque() . "</td>";
+                            echo "<td>" . $contravention->getLieuContrav() . "</td>";
+                            echo "<td>" . $contravention->getNoViolation() . "</td>";
                             echo "<td><a href=rechercher_contrav.php?code=" . htmlspecialchars($contravention->getCode()) . ">Plus</a></td>";
                             echo "</tr>";
                         }
@@ -81,46 +84,46 @@
                         ?>
                         </tbody>
                     </table>
-                <?php
-            } else {
-                if($contrav->getCode() != null){
-                ?>
-                    <h1>Liste des Contraventions</h1>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Code</th>
-                                <th>Nom</th>
-                                <th>Prénom</th>
-                                <th>Infraction</th>
-                                <th>Date</th>
-                                <th>Statut</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $date = new DateTime($contrav->getDate());
-                            $dateSimple = $date->format('d-m-Y');
-                            echo "<tr>";
-                            echo "<td>" . $contrav->getCode() . "</td>";
-                            echo "<td>" . $contrav->getNom() . "</td>";
-                            echo "<td>" . $contrav->getPrenom() . "</td>";
-                            echo "<td>" . $contrav->getInfraction() . "</td>";
-                            echo "<td>" . $dateSimple . "</td>";
-                            echo "<td>" . $contrav->getStatut() . "</td>";
-                            echo "<td><a href=rechercher_contrav.php?code=" . htmlspecialchars($contrav->getCode()) . ">Plus</a></td>";
-                            echo "</tr>";
-                            ?>
-                        </tbody>
-                    </table>
+                    <?php
+                } else {
+                    if ($contrav->getCode() != null) {
+                    ?>
+                        <h1>Liste des Contraventions</h1>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Nom</th>
+                                    <th>No. Permit</th>
+                                    <th>No. Plaque</th>
+                                    <th>Lieu</th>
+                                    <th>No. Violation</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $date = new DateTime($contrav->getDate());
+                                $dateSimple = $date->format('d-m-Y');
+                                echo "<tr>";
+                                echo "<td>" . $contrav->getCode() . "</td>";
+                                echo "<td>" . $contrav->getNomProprio() . "</td>";
+                                echo "<td>" . $contrav->getNoPermit() . "</td>";
+                                echo "<td>" . $contrav->getNoPlaque() . "</td>";
+                                echo "<td>" . $contrav->getLieuContrav() . "</td>";
+                                echo "<td>" . $contrav->getNoViolation() . "</td>";
+                                echo "<td><a href=rechercher_contrav.php?code=" . htmlspecialchars($contrav->getCode()) . ">Plus</a></td>";
+                                echo "</tr>";
+                                ?>
+                            </tbody>
+                        </table>
             <?php
-            }else{
-                echo "<p style='color: red;'>Numéro de contravention introuvable</p>";
+                    } else {
+                        echo "<p style='color: red;'>Numéro de contravention introuvable</p>";
+                    }
+                }
             }
-        }
-        }
-    } else {
+        } else {
             ?>
             <?php
             if ((count($contraventions) > 0) && $contraventions != null) { ?>
@@ -130,10 +133,10 @@
                         <tr>
                             <th>Code</th>
                             <th>Nom</th>
-                            <th>Prénom</th>
-                            <th>Infraction</th>
-                            <th>Date</th>
-                            <th>Statut</th>
+                            <th>No. Permit</th>
+                            <th>No. Plaque</th>
+                            <th>Lieu</th>
+                            <th>No. Violation</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -144,11 +147,11 @@
                             $dateSimple = $date->format('d-m-Y');
                             echo "<tr>";
                             echo "<td>" . $contravention->getCode() . "</td>";
-                            echo "<td>" . $contravention->getNom() . "</td>";
-                            echo "<td>" . $contravention->getPrenom() . "</td>";
-                            echo "<td>" . $contravention->getInfraction() . "</td>";
-                            echo "<td>" . $dateSimple . "</td>";
-                            echo "<td>" . $contravention->getStatut() . "</td>";
+                            echo "<td>" . $contravention->getNomProprio() . "</td>";
+                            echo "<td>" . $contravention->getNoPermit() . "</td>";
+                            echo "<td>" . $contravention->getNoPlaque() . "</td>";
+                            echo "<td>" . $contravention->getLieuContrav() . "</td>";
+                            echo "<td>" . $contravention->getNoViolation() . "</td>";
                             echo "<td><a href=rechercher_contrav.php?code=" . htmlspecialchars($contravention->getCode()) . ">Plus</a></td>";
                             echo "</tr>";
                         }
