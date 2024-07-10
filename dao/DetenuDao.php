@@ -126,13 +126,53 @@ class DetenuDao implements IDao{
     //fonction permettant de supprimer un detenu
     public function delete($id):bool{
         try {
-            $query = "UPDATE detenu SET etat=:etat WHERE code=:code";
+            $query = "DELETE FROM detenu WHERE etat=:etat AND code=:code";
+            $stmt = $this->db->prepare($query);
+
+            $etat = 1;
+            $code = $id;
+
+            $stmt->bindParam(':etat', $etat);
+            $stmt->bindParam(':code', $code);
+
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Erreur lors de la modification de la prison : " . $e->getMessage();
+        }
+        return false;
+    }
+
+    //fonction permettant de supprimer un detenu
+    public function liberer($id):bool{
+        try {
+            $query = "UPDATE detenu SET statut=:statut, etat=:etat WHERE code=:code";
             $stmt = $this->db->prepare($query);
 
             $etat = 0;
             $code = $id;
+            $statut = 'liberer';
 
+            $stmt->bindParam(':statut', $statut);
             $stmt->bindParam(':etat', $etat);
+            $stmt->bindParam(':code', $code);
+
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Erreur lors de la modification de la prison : " . $e->getMessage();
+        }
+        return false;
+    }
+
+    //fonction permettant de supprimer un detenu
+    public function transferer($id, $idPrison):bool{
+        try {
+            $query = "UPDATE detenu SET codePrison=:codePrison WHERE code=:code";
+            $stmt = $this->db->prepare($query);
+
+            $code = $id;
+            $codePrison = $idPrison;
+
+            $stmt->bindParam(':codePrison', $codePrison);
             $stmt->bindParam(':code', $code);
 
             return $stmt->execute();
@@ -178,8 +218,43 @@ class DetenuDao implements IDao{
         }
     }
 
-    public function nombreDetenu($idPrison):int{
+        //fonction permettant d'afficher les detenus
+    public function displayAllLib():array{
+        try {
+            $query = "SELECT * FROM detenu WHERE etat=:etat";
+            $stmt = $this->db->prepare($query);
 
+            $etat = '0';
+            $stmt->bindParam(':etat', $etat);
+            $stmt->execute();
+
+            $detenus = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $detenu = new Detenu();
+                    $detenu->setCode($row['code']);
+                    $detenu->setNom($row['nom']);
+                    $detenu->setPrenom($row['prenom']);
+                    $detenu->setCin_nif($row['cin_nif']);
+                    $detenu->setSexe($row['sexe']);
+                    $detenu->setAdresse($row['adresse']);
+                    $detenu->setTelephone($row['telephone']);
+                    $detenu->setInfraction($row['infraction']);
+                    $detenu->setCodePrison($row['codePrison']);
+                    $detenu->setDateArrestation($row['dateArrestation']);
+                    $detenu->setStatut($row['statut']);
+                    $detenu->setEtat($row['etat']);
+                    $detenus[] = $detenu;
+            }
+
+            return $detenus;
+        } catch (PDOException $e) {
+            echo "Erreur lors de la récupération des prisons : " . $e->getMessage();
+            return [];
+        }
+    }
+
+    public function nombreDetenu($idPrison):int{
         try {
             $query = "SELECT COUNT(*) AS total FROM detenu WHERE etat=:etat AND codePrison=:codePrison";
             $stmt = $this->db->prepare($query);

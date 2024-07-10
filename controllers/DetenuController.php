@@ -11,13 +11,29 @@ $prisonDao = new PrisonDAO();
 if (isset($_GET['code'])) {
     // Récupérer la valeur de 'code' depuis l'URL
     $code = $_GET['code'];
-    
-    if($detenuDao->delete($code)){
-        echo "Suppression effectuee avec succes";
-        header("Location: ../views/detenu/afficher_detenu.php");
-    exit();
-    }else{
-        echo "impossible";
+    $action = $_GET['choix'];
+
+    switch($action){
+        case 'sup':{
+            if($detenuDao->delete($code)){
+                echo "Suppression effectuee avec succes";
+                header("Location: ../views/detenu/afficher_detenu.php");
+            exit();
+            }else{
+                echo "impossible";
+            }
+            break;
+        }
+        case 'lib':{
+            if($detenuDao->liberer($code)){
+                echo "Liberation effectuee avec succes";
+                header("Location: ../views/detenu/afficher_detenu.php");
+            exit();
+            }else{
+                echo "impossible";
+            }
+            break;
+        }
     }
 }
 
@@ -249,6 +265,66 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 if($detenuDao->update($detenu)){
                     echo "<p>Modification effectuee avec Succes</p>";
+                }else{
+                    echo "Une erreur s'est produite";
+                }
+                exit();
+            }
+            break;
+        }
+        case "Transferer":{
+            //------------Transferer
+            $errors = [];
+            $values = [];
+            $detenu = new Detenu();
+            $detenuDao = new DetenuDao();
+            $prisonDao = new PrisonDAO();
+
+            if (!isset($_POST['idDetenu']) || empty(trim($_POST['idDetenu']))) {
+                
+            } else {
+                $values['idDetenu'] = htmlspecialchars(trim($_POST['idDetenu']));
+            }
+
+            // Vérification du champ 'codePrison'
+            if(isset($_POST['codePrison'])){
+                if (empty(trim($_POST['codePrison']))) {
+                    $values['codePrison'] = null;
+                } else {
+                    if(preg_match('/^\d+$/', htmlspecialchars(trim($_POST['codePrison'])))){
+                        $prison = $prisonDao->rechercherPrisons(htmlspecialchars(trim($_POST['codePrison'])));
+                        
+                        if($prison == null){
+                            $errors['error_codePrison'] = "Une erreur s'est produite, Prison inexistant";
+                        }else{
+                            $totalDetenu = $detenuDao->nombreDetenu($prison->getCode());
+                            if($totalDetenu < ($prison->getNombreCellules() * $prison->getNombrePlacesParCellule())){
+                                $values['codePrison'] = htmlspecialchars(trim($_POST['codePrison']));
+                            }else{
+                                $errors['error_codePrison'] = "Une erreur s'est produite, La prison n'a plus de place";
+                            }
+                        }
+                        $values['codePrison'] = htmlspecialchars(trim($_POST['codePrison']));
+                    }else{
+                        $errors['error_codePrison'] = "Une erreur s'est produite dans la recuperation de la code";
+                    }
+                }
+            }else{
+                $errors['error_codePrison'] = "Une erreur s'est produite dans la recuperation de la code";
+            }
+
+            if(!empty($errors)) {
+                $query = http_build_query(array_merge($errors, $values));
+                header("Location: ../views/detenu/modifier_detenu.php?$query");
+                exit();
+            } else {
+
+                $detenu->setCode($values['idDetenu']);
+                $detenu->setCodePrison($values['codePrison']);
+                //$detenu->setStatut($values['statut']);
+
+                if($detenuDao->transferer($detenu->getCode(), $detenu->getCodePrison())){
+                    echo "<p>Transfert effectue avec Succes</p>";
                 }else{
                     echo "Une erreur s'est produite";
                 }
