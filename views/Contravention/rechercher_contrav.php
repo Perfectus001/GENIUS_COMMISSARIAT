@@ -51,9 +51,7 @@
 
                 <br><br>
                 <a href="modifier_contrav.php?contravention=<?= $queryString ?>">Modifier</a> || 
-                <a href="../../controllers/contraventionController.php?choix=sup&noViolation=<?= $contravention->getNoViolation() ?>">Supprimer</a> || 
-                <a href="modifier_contrav.php?contravention=<?= $queryString ?>">Transfert</a> || 
-                <a href="../../controllers/contraventionController.php?choix=lib&noViolation=<?= $contravention->getNoViolation() ?>">Liberer</a> 
+                <a href="../../controllers/contraventionController.php?choix=sup&noViolation=<?= $contravention->getNoViolation() ?>">Supprimer</a> ||
                 <?php
             }
         }
