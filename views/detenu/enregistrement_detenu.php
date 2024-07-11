@@ -55,7 +55,7 @@
                 </div>
                 <div class="form-group col-12 mb-3">
                     <label for="cin_nif">CIN_NIF</label>
-                    <input type="text" class="form-control" name="cin_nif" id="cin_nif" value="<?php echo isset($_GET['cin_nif']) ? htmlspecialchars($_GET['cin_nif']) : ''; ?>">
+                    <input type="text" class="form-control" name="cin_nif" id="cin_nif" value="<?php echo isset($_GET['cin_nif']) ? htmlspecialchars($_GET['cin_nif']) : ''; ?>"placeholder="xxx-xxx-xxxx ou xxxxxxxxxx">
                     <?php if (isset($_GET['error_cin_nif'])) echo "<div class='text-danger'>" . $_GET['error_cin_nif'] . "</div>"; ?>
                 </div>
                 <div class="form-group col-12 mb-3">
