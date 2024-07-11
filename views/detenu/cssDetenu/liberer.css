@@ -15,12 +15,13 @@ body {
 }
 
 .main-content {
- 
+    margin-left: -150px;
     padding: 20px;
     width: calc(90% - 250px);
 }
 
 form {
+    border: 1px solid #e40b0b;
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
