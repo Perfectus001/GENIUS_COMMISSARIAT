@@ -26,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Supprimer Autorisation</title>
     <link rel="stylesheet" href="./css/deleteA.css"> <!-- Ajustez le chemin vers votre fichier CSS -->
- 
 </head>
 <body>
     <div class="form-container">
