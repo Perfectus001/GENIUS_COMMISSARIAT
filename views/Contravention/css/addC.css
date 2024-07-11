@@ -31,11 +31,7 @@
     margin-bottom: -10px; /* Espacement entre les champs */
     box-sizing: border-box; /* Pour inclure le padding dans la largeur totale */
 }
-.submit-btn{
-   
  
-}
-
 /* Style du bouton de soumission */
 .form-container .submit-btn {
     width: 100%; /* Largeur du bouton sur une seule colonne */

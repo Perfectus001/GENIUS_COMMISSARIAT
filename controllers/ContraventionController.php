@@ -115,6 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     if ($daoContrav->save($contravention)) {
                         echo "Succes de l'enregistrement";
+                        header('Location: ../Views/Contravention/afficher_contrav.php');
                     }
                     exit();
                 }
@@ -218,6 +219,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     if ($daoContrav->update($contravention)) {
                         echo "Succes de la modification";
+                        header('Location: ../Views/Contravention/afficher_contrav.php');
                     }
                     exit();
                 }

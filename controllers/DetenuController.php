@@ -264,7 +264,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 //$detenu->setStatut($values['statut']);
 
                 if($detenuDao->update($detenu)){
-                    header("Location: ../views/detenu/afficher_detenu.php");
+                    echo "<p>Modification effectuee avec Succes</p>";
                 }else{
                     echo "Une erreur s'est produite";
                 }
