@@ -156,18 +156,18 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="#">
+            <a href="../detenu/enregistrement_detenu.php">
               <i class="bi bi-circle"></i><span> Enregistrer </span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="../detenu/afficher_detenu.php">
               <i class="bi bi-circle"></i><span>Listes Detenus</span>
             </a>
           </li>
           <li>
-            <a href="#">
-              <i class="bi bi-circle"></i><span>modifier Detenu</span>
+            <a href="../detenu/afficher_detenuLiberer.php">
+              <i class="bi bi-circle"></i><span>Personne libere</span>
             </a>
           </li>
           
@@ -180,23 +180,13 @@
         </a>
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="#">
+            <a href="../Contravention/enregistrer_contrav.php">
               <i class="bi bi-circle"></i><span> Enregistrer </span>
             </a>
           </li>
           <li>
-            <a href="#">
-              <i class="bi bi-circle"></i><span>rechercher </span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="bi bi-circle"></i><span>imprimer </span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="bi bi-circle"></i><span>suprimer </span>
+            <a href="../Contravention/afficher_contrav.php">
+              <i class="bi bi-circle"></i><span>Afficher </span>
             </a>
           </li>
         </ul>
