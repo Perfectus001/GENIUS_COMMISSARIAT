@@ -51,7 +51,8 @@
 
                 <br><br>
                 <a href="modifier_contrav.php?contravention=<?= $queryString ?>">Modifier</a> || 
-                <a href="../../controllers/contraventionController.php?choix=sup&noViolation=<?= $contravention->getNoViolation() ?>">Supprimer</a> ||
+                <a href="../../controllers/contraventionController.php?choix=sup&code=<?= $contravention->getCode() ?>">Supprimer</a> ||
+                <a href="impression.php?contravention=<?= $queryString ?>">Imprimer</a>
                 <?php
             }
         }

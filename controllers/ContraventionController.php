@@ -1,6 +1,25 @@
 <?php
 require_once(__DIR__ . '/../dao/Contraventiondao.php');
 $daoContrav = new ContraventionDAO();
+if (isset($_GET['code'])) {
+    // Récupérer la valeur de 'code' depuis l'URL
+    $code = $_GET['code'];
+    $action = $_GET['choix'];
+
+    switch($action){
+        case 'sup':{
+            if($daoContrav->delete($code)){
+                echo "Suppression effectuee avec succes";
+                header("Location: ../views/Contravention/afficher_contrav.php");
+            exit();
+            }else{
+                echo "impossible";
+            }
+            break;
+        }
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $submit = $_POST['sub'];
     $errors = [];

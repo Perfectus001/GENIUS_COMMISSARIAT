@@ -53,3 +53,18 @@
     }
 }
  
+@media print {
+    /* Masquer l'en-tête et le pied de page par défaut */
+    @page {
+        margin: 0;
+    }
+
+    body {
+        margin: 1.6cm;
+    }
+
+    /* Masquer les éléments spécifiques (comme des liens) si nécessaire */
+    a[href]:after {
+        content: none;
+    }
+}
