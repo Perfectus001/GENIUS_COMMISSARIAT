@@ -135,6 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 if($detenuDao->save($detenu)){
                     echo "<p>Enregistrement effectue avec Succes</p>";
+                    header('Location: ../Views/detenu/afficher_detenu.php');
                 }else{
                     echo "Une erreur s'est produite";
                 }
@@ -265,6 +266,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 if($detenuDao->update($detenu)){
                     echo "<p>Modification effectuee avec Succes</p>";
+                    header('Location: ../Views/detenu/afficher_detenu.php');
                 }else{
                     echo "Une erreur s'est produite";
                 }
