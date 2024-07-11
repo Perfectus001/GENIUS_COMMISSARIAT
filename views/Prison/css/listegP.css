@@ -1,0 +1,69 @@
+/* listeP.css */
+body {
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar {
+    width: 25px;
+    flex-shrink: 0;
+    background-color: #343a40;
+    color: white;
+    padding: 15px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 2px;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aligner le contenu à gauche */
+}
+
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 110%; /* Réduire la largeur du tableau */
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #fff;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-left: -20%; /* Supprimer la marge à droite et ajouter une marge à gauche si nécessaire */
+}
+
+th, td {
+    padding: 10px; /* Réduire le padding */
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f1f1f1;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

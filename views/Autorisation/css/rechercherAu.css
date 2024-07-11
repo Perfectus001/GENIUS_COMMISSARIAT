@@ -1,0 +1,108 @@
+
+/* Styles de base pour le corps de la page */
+body {
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+background-color: #f4f4f4;
+}
+
+/* Conteneur principal */
+.container {
+width: 80%;
+ 
+padding: 20px;
+background-color: #fff;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+border-radius: 8px;
+}
+
+/* Titre principal */
+h1 {
+text-align: center;
+color: #333;
+}
+
+/* Styles pour le formulaire */
+form {
+max-width: 400px;
+margin-left: 45%;
+display: flex;
+flex-direction: column;
+}
+
+label {
+margin-bottom: 5px;
+color: #333;
+}
+
+.imp,[type="text"], input[type="submit"] {
+padding: 10px;
+margin-bottom: 10px;
+border: 1px solid #ddd;
+border-radius: 4px;
+}
+
+input[type="text"] {
+width: calc(100% - 22px); /* Ajuster la largeur pour tenir compte du padding et de la bordure */
+}
+
+input[type="submit"] ,.imp{
+background-color: #007bff;
+color: #fff;
+border: none;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.imp,input[type="submit"]:hover {
+background-color: #0056b3;
+}
+
+/* Message d'erreur */
+.error {
+color: red;
+text-align: center;
+}
+
+/* Conteneur pour les détails de l'autorisation */
+.details {
+max-width: 800px;
+margin-left: 28%;
+padding: 20px;
+background-color: #f9f9f9;
+border: 1px solid #ddd;
+border-radius: 4px;
+}
+
+.details h2 {
+text-align: center;
+color: #333;
+margin-bottom: 20px;
+}
+
+.details .detail-item {
+display: flex;
+justify-content: space-between;
+margin-bottom: 10px;
+padding: 10px;
+background-color: #fff;
+border: 1px solid #ddd;
+border-radius: 4px;
+width: 30%;
+box-sizing: border-box;
+}
+
+/* Conteneur de la grille */
+.details-grid {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+justify-content: space-between;
+}
+
+.details p strong {
+display: inline-block;
+width: 200px;
+color: #333;
+}

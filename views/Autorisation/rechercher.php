@@ -20,121 +20,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Rechercher une Autorisation</title>
-    <link rel="stylesheet" href="./css/rechercherA.css">
- <style>
-    /* Styles de base pour le corps de la page */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
+    <link rel="stylesheet" href="css/rechercherAu.css">
+ <link href="../../partials/assets/img/favicon.png" rel="icon">
+    <link href="../../partials/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-/* Conteneur principal */
-.container {
-    width: 80%;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
+    <!-- Vendor CSS Files -->
+    <link href="../../partials/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../partials/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../../partials/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../../partials/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="../../partials/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="../../partials/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="../../partials/assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
-/* Titre principal */
-h1 {
-    text-align: center;
-    color: #333;
-}
-
-/* Styles pour le formulaire */
-form {
-    max-width: 400px;
-    margin: 0 auto 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    margin-bottom: 5px;
-    color: #333;
-}
-
-input[type="text"], input[type="submit"] {
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-input[type="text"] {
-    width: calc(100% - 22px); /* Ajuster la largeur pour tenir compte du padding et de la bordure */
-}
-
-input[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-input[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-/* Message d'erreur */
-.error {
-    color: red;
-    text-align: center;
-}
-
-/* Conteneur pour les détails de l'autorisation */
-.details {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.details h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.details .detail-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 30%;
-    box-sizing: border-box;
-}
-
-/* Conteneur de la grille */
-.details-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: space-between;
-}
-
-.details p strong {
-    display: inline-block;
-    width: 200px;
-    color: #333;
-}
-
-   </style>
+    <!-- Template Main CSS File -->
+    <link href="../../partials/assets/css/style.css" rel="stylesheet">
 </head>
 <body>
+<div class="sidebar">
+        <?php include('../../partials/sidebar.php'); ?>
+    </div>
+    
     <div class="container">
-        <h1>Rechercher une Autorisation par Code</h1>
+      
         <form method="post" action="">
             <label for="code">Code:</label>
             <input type="text" name="code" id="code" required>
@@ -145,7 +56,8 @@ input[type="submit"]:hover {
             <p class="error"><?php echo htmlspecialchars($error); ?></p>
         <?php elseif ($autorisation): ?>
             <div class="details">
-                <h2>Détails de l'Autorisation</h2>
+                <a class="imp" href="imprimer.php?code=<?php echo htmlspecialchars($autorisation->getCode()); ?>">Imprimer</a>
+                <h2>Détails de l'Autorisation  </h2>
                 <div class="details-grid">
                     <div class="detail-item"><strong>Code:</strong> <?php echo htmlspecialchars($autorisation->getCode()); ?></div>
                     <div class="detail-item"><strong>Marque:</strong> <?php echo htmlspecialchars($autorisation->getMarque()); ?></div>
@@ -164,11 +76,23 @@ input[type="submit"]:hover {
                     <div class="detail-item"><strong>Adresse:</strong> <?php echo htmlspecialchars($autorisation->getAdresse()); ?></div>
                 </div>
                 <td>
-    <a href="imprimer.php?code=<?php echo htmlspecialchars($autorisation->getCode()); ?>">Imprimer</a>
+   
 </td>
 
             </div>
         <?php endif; ?>
     </div>
+          <!-- Vendor JS Files -->
+          <script src="../../partials/assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="../../partials/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../partials/assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="../../partials/assets/vendor/echarts/echarts.min.js"></script>
+    <script src="../../partials/assets/vendor/quill/quill.js"></script>
+    <script src="../../partials/assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="../../partials/assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="../../partials/assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="../../partials/assets/js/main.js"></script>
 </body>
 </html>

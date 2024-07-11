@@ -1,0 +1,43 @@
+/* fichier : listeA.css */
+
+/* Style pour la table */
+table {
+    width: 70%; /* Largeur de la table */
+    margin-left: 25%; /* Centrer la table horizontalement */
+    border-collapse: collapse; /* Fusionner les bordures */
+    background-color: #fff; /* Couleur de fond */
+    border-radius: 8px; /* Bords arrondis */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre portée */
+    text-align: center; /* Centrer le texte */
+    margin-top: 20px; /* Marge supérieure */
+}
+
+/* Style pour les en-têtes de colonnes */
+table th {
+    background-color: #f2f2f2; /* Couleur de fond */
+    padding: 10px; /* Espacement interne */
+    border-bottom: 1px solid #ddd; /* Bordure inférieure */
+}
+
+/* Style pour les cellules */
+table td {
+    padding: 10px; /* Espacement interne */
+    border-bottom: 1px solid #ddd; /* Bordure inférieure */
+}
+
+/* Style pour les liens */
+table a {
+    color: #007bff; /* Couleur du lien */
+    text-decoration: none; /* Pas de soulignement */
+}
+
+table a:hover {
+    text-decoration: underline; /* Soulignement au survol */
+}
+
+/* Réglage pour les petits écrans */
+@media (max-width: 768px) {
+    table {
+        width: 80%; /* Réduire la largeur pour les petits écrans */
+    }
+}

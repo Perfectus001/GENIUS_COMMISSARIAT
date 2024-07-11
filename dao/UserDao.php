@@ -29,10 +29,20 @@ class UserDAO {
 
     public function addUser($user) {
         try {
+            $username = $user->getUsername();
+            $password = $user->getPassword();
+            $role = $user->getRole();
+
+            // Vérification si l'utilisateur existe déjà
+            if ($this->getUserByUsername($username) !== null) {
+                echo "";
+                return false;
+            }
+
             $stmt = $this->db->prepare('INSERT INTO users (username, password, role) VALUES (:username, :password, :role)');
-            $stmt->bindParam(':username', $user->getUsername());
-            $stmt->bindParam(':password', $user->getPassword());
-            $stmt->bindParam(':role', $user->getRole());
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':password', $password);
+            $stmt->bindParam(':role', $role);
             return $stmt->execute();
         } catch (PDOException $e) {
             echo "Erreur : " . $e->getMessage();

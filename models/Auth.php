@@ -22,5 +22,17 @@ class Auth {
     public function getRole() {
         return $this->role;
     }
+
+    public function setUsername($username) {
+        $this->username = $username;
+    }
+
+    public function setPassword($password) {
+        $this->password = $password;
+    }
+
+    public function setRole($role) {
+        $this->role = $role;
+    }
 }
 ?>

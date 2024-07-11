@@ -1,0 +1,65 @@
+/* fichier : detailA.css */
+
+/* Style pour le corps de la page */
+body {
+    font-family: Arial, sans-serif; /* Police de caractères */
+    background-color: #f4f4f4; /* Couleur de fond */
+    color: #333; /* Couleur du texte */
+    margin: 0; /* Marges */
+    padding: 0; /* Espacement interne */
+    display: flex;
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+    height: 100vh; /* Hauteur de la fenêtre */
+    flex-direction: column; /* Disposer les éléments en colonne */
+}
+
+/* Style pour le conteneur de la table */
+.table-container {
+    width: 70%; /* Largeur du conteneur */
+    background-color: #fff; /* Couleur de fond */
+    border-radius: 8px; /* Bords arrondis */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre portée */
+    padding: 20px; /* Espacement interne */
+    box-sizing: border-box; /* Inclure le padding dans la largeur */
+    margin-left: 27%;
+}
+
+/* Style pour le titre */
+h1 {
+    margin-bottom: 20px; /* Marge inférieure */
+    text-align: center; /* Centrer le texte */
+}
+
+/* Style pour la table */
+table {
+    width: 100%; /* Largeur de la table */
+    border-collapse: collapse; /* Fusionner les bordures */
+}
+
+/* Style pour les en-têtes de colonnes */
+table th {
+    background-color: #f2f2f2; /* Couleur de fond */
+    padding: 10px; /* Espacement interne */
+    border-bottom: 1px solid #ddd; /* Bordure inférieure */
+    text-align: left; /* Aligner le texte à gauche */
+}
+
+/* Style pour les cellules */
+table td {
+    padding: 10px; /* Espacement interne */
+    border-bottom: 1px solid #ddd; /* Bordure inférieure */
+}
+
+/* Style pour le lien */
+a {
+    color: #007bff; /* Couleur du lien */
+    text-decoration: none; /* Pas de soulignement */
+    display: inline-block; /* Bloquer l'élément en ligne */
+    margin-top: 20px; /* Marge supérieure */
+    text-align: center; /* Centrer le texte */
+}
+
+a:hover {
+    text-decoration: underline; /* Soulignement au survol */
+}
