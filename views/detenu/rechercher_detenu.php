@@ -1,237 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Afficher Contravention</title>
+    <title>Recherche détenu</title>
+    <link href="../../partials/assets/img/favicon.png" rel="icon">
+    <link href="../../partials/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../../partials/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../partials/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="../../partials/assets/css/style.css" rel="stylesheet">
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        table, th, td {
-            border: 1px solid black;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
+        .main-content {
+            margin-left: 250px; /* Ajuster la marge pour éviter le chevauchement avec la sidebar */
+            padding: 20px;
         }
     </style>
 </head>
-
 <body>
-    <form action="" method="post">
-        <div>
-            <label for="noViolation">Numéro de Violation</label>
-            <input type="text" id="noViolation" name="noViolation" />
-        </div>
-        <div>
-            <input type="submit" value="Recherche">
-        </div>
-    </form>
-    <?php
-    require_once(__DIR__ . '/../../dao/ContraventionDao.php');
-    $contraventionDao = new ContraventionDao();
-    $contraventions = $contraventionDao->displayAll();
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if (!isset($_POST['noViolation']) || empty(trim($_POST['noViolation']))) {
-    ?>
-            <p style='color: red;'>Le champ est requis</p>
+    <div class="sidebar">
+        <?php include('../../partials/sidebar.php'); ?>
+    </div>
 
-            <?php
-        } else {
-            $noViolation = htmlspecialchars(trim($_POST['noViolation']));
-            $contrav = $contraventionDao->search($noViolation);
-            if ($contrav == null) {
-                if ((count($contraventions) > 0) && $contraventions != null) { ?>
-                    <h1>Liste des Contraventions</h1>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Numéro de Violation</th>
-                                <th>Nom Propriétaire</th>
-                                <th>Numéro de Permis</th>
-                                <th>Numéro de Plaque</th>
-                                <th>Lieu de la Contravention</th>
-                                <th>Article</th>
-                                <th>Date</th>
-                                <th>Heure</th>
-                                <th>Numéro d'Agent</th>
-                                <th>Numéro de Matricule</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        foreach ($contraventions as $contravention) {
-                            $date = new DateTime($contravention->getDate());
-                            $dateSimple = $date->format('d-m-Y');
-                            echo "<tr>";
-                            echo "<td>" . $contravention->getNoViolation() . "</td>";
-                            echo "<td>" . $contravention->getNomProprio() . "</td>";
-                            echo "<td>" . $contravention->getNoPermit() . "</td>";
-                            echo "<td>" . $contravention->getNoPlaque() . "</td>";
-                            echo "<td>" . $contravention->getLieuContrav() . "</td>";
-                            echo "<td>" . $contravention->getArticle() . "</td>";
-                            echo "<td>" . $dateSimple . "</td>";
-                            echo "<td>" . $contravention->getHeure() . "</td>";
-                            echo "<td>" . $contravention->getNoAgent() . "</td>";
-                            echo "<td>" . $contravention->getNoMatricule() . "</td>";
-                            echo "<td><a href=rechercher_contrav.php?noViolation=" . htmlspecialchars($contravention->getNoViolation()) . ">Plus</a></td>";
-                            echo "</tr>";
-                        }
-                    } else {
-                        echo "<p>Aucune contravention n'est enregistrée</p>";
-                    }
-                        ?>
-                        </tbody>
-                    </table>
-                <?php
-            } else {
-                if($contrav->getNoViolation() != null){
-                ?>
-                    <h1>Détails de la Contravention</h1>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Numéro de Violation</th>
-                                <th>Nom Propriétaire</th>
-                                <th>Numéro de Permis</th>
-                                <th>Numéro de Plaque</th>
-                                <th>Lieu de la Contravention</th>
-                                <th>Article</th>
-                                <th>Date</th>
-                                <th>Heure</th>
-                                <th>Numéro d'Agent</th>
-                                <th>Numéro de Matricule</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $date = new DateTime($contrav->getDate());
-                            $dateSimple = $date->format('d-m-Y');
-                            echo "<tr>";
-                            echo "<td>" . $contrav->getNoViolation() . "</td>";
-                            echo "<td>" . $contrav->getNomProprio() . "</td>";
-                            echo "<td>" . $contrav->getNoPermit() . "</td>";
-                            echo "<td>" . $contrav->getNoPlaque() . "</td>";
-                            echo "<td>" . $contrav->getLieuContrav() . "</td>";
-                            echo "<td>" . $contrav->getArticle() . "</td>";
-                            echo "<td>" . $dateSimple . "</td>";
-                            echo "<td>" . $contrav->getHeure() . "</td>";
-                            echo "<td>" . $contrav->getNoAgent() . "</td>";
-                            echo "<td>" . $contrav->getNoMatricule() . "</td>";
-                            echo "<td><a href=rechercher_contrav.php?noViolation=" . htmlspecialchars($contrav->getNoViolation()) . ">Plus</a></td>";
-                            echo "</tr>";
-                            ?>
-                        </tbody>
-                    </table>
-            <?php
-            }else{
-                ?>
-                <p>NOM: <?= $detenu->getNom() ?> </p>
-                <p>PRENOM: <?= $detenu->getPreNom() ?> </p>
-                <p>CIN|NIF: <?= $detenu->getCin_nif() ?> </p>
-                <p>SEXE: <?= $detenu->getSexe() ?> </p>
-                <p>ADRESSE: <?= $detenu->getAdresse() ?> </p>
-                <p>TELEPHONE: <?= $detenu->getTelephone() ?> </p>
-                <p>INFRACTION: <?= $detenu->getInfraction() ?> </p>
-                <p>STATUT: <?= $detenu->getStatut() ?> </p>
-                <?php 
+    <div class="main-content">
+        <?php
+            require_once(__DIR__ . '/../../dao/DetenuDao.php');
+            $detenuDao = new DetenuDao();
 
-                if ($detenu->getCodePrison() == null) {
-                ?>
-                    <p>PRISON: Commissariat</p>
-                <?php
+            if (isset($_GET['code'])) {
+                $code = $_GET['code'];
+
+                $detenu = $detenuDao->search($code);
+
+                if($detenu == null){
+                    echo "<div class='alert alert-warning'>Détenu introuvable</div>";
                 } else {
-                ?>
-                    <p>PRISON: <?= $detenu->getCodePrison()  ?> </p>
+                    ?>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Détails du détenu</h5>
+                            <div class="card-content">
+                                <p><strong>NOM:</strong> <?= htmlspecialchars($detenu->getNom()) ?> </p>
+                                <p><strong>PRENOM:</strong> <?= htmlspecialchars($detenu->getPreNom()) ?> </p>
+                                <p><strong>CIN|NIF:</strong> <?= htmlspecialchars($detenu->getCin_nif()) ?> </p>
+                                <p><strong>SEXE:</strong> <?= htmlspecialchars($detenu->getSexe()) ?> </p>
+                                <p><strong>ADRESSE:</strong> <?= htmlspecialchars($detenu->getAdresse()) ?> </p>
+                                <p><strong>TELEPHONE:</strong> <?= htmlspecialchars($detenu->getTelephone()) ?> </p>
+                                <p><strong>INFRACTION:</strong> <?= htmlspecialchars($detenu->getInfraction()) ?> </p>
+                                <p><strong>STATUT:</strong> <?= htmlspecialchars($detenu->getStatut()) ?> </p>
+                                <p><strong>PRISON:</strong> <?= $detenu->getCodePrison() ? htmlspecialchars($detenu->getCodePrison()) : 'Commissariat' ?> </p>
+                                <?php 
+                                    $date = new DateTime($detenu->getDateArrestation());
+                                    $dateSimple = $date->format('d-m-Y');
+                                ?>
+                                <p><strong>DATE ARRESTATION:</strong> <?= $dateSimple ?></p>
+                            </div>
+
+                            <div class="mt-3">
+                                <a href="modifier_detenu.php?detenu=<?= $queryString ?>" class="btn btn-link">
+                                    <i class="bi bi-pencil-square"></i> Modifier
+                                </a>
+                                <a href="../../controllers/detenuController.php?choix=sup&code=<?= htmlspecialchars($detenu->getCode()) ?>" class="btn btn-link">
+                                    <i class="bi bi-trash"></i> Supprimer
+                                </a>
+                                <a href="transferer_detenu.php?detenu=<?= $queryString ?>" class="btn btn-link">
+                                    <i class="bi bi-arrow-right-square"></i> Transfert
+                                </a>
+                                <a href="../../controllers/detenuController.php?&choix=lib&code=<?= htmlspecialchars($detenu->getCode()) ?>" class="btn btn-link">
+                                    <i class="bi bi-door-open"></i> Libérer
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 <?php
                 }
-                $date = new DateTime($detenu->getDateArrestation());
-                $dateSimple = $date->format('d-m-Y');
-
-                $detArray = [
-                    ''=>'',
-                    'idDetenu' => $detenu->getCode(),
-                    'nom'=> $detenu->getNom(),
-                    'prenom'=> $detenu->getprenom(),
-                    'cin_nif'=> $detenu->getCin_nif(),
-                    'sexe'=> $detenu->getSexe(),
-                    'adresse'=> $detenu->getAdresse(),
-                    'telephone'=> $detenu->getTelephone(),
-                    'infraction'=> $detenu->getInfraction(),
-                    'statut'=> $detenu->getStatut(),
-                    'codePrison'=> $detenu->getCodePrison(),
-                    'dateArrestation'=> $detenu->getDateArrestation(),
-                    'etat'=> $detenu->getEtat(),
-                ];
-
-                $queryString = http_build_query(['detenu' => $detArray]);
-                ?>
-                    <p>DATE ARRESTATION: <?= $dateSimple ?></p>
-
-                    <br><br>
-                    <a href="modifier_detenu.php?detenu<?= $queryString ?>">Modifier</a> || 
-                    <a href="../../controllers/detenuController.php?choix=sup&code=<?= $detenu->getCode() ?>">Supprimer</a> || 
-                    <a href="transferer_detenu.php?detenu=<?= $queryString ?>">Transfert</a> || 
-                    <a href="../../controllers/detenuController.php?&choix=lib&code=<?= $detenu->getCode() ?>">Liberer</a> 
-                <?php
             }
-        }
-        }
-    } else {
-            ?>
-            <?php
-            if ((count($contraventions) > 0) && $contraventions != null) { ?>
-                <h1>Liste des Contraventions</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Numéro de Violation</th>
-                            <th>Nom Propriétaire</th>
-                            <th>Numéro de Permis</th>
-                            <th>Numéro de Plaque</th>
-                            <th>Lieu de la Contravention</th>
-                            <th>Article</th>
-                            <th>Date</th>
-                            <th>Heure</th>
-                            <th>Numéro d'Agent</th>
-                            <th>Numéro de Matricule</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach ($contraventions as $contravention) {
-                            $date = new DateTime($contravention->getDate());
-                            $dateSimple = $date->format('d-m-Y');
-                            echo "<tr>";
-                            echo "<td>" . $contravention->getNoViolation() . "</td>";
-                            echo "<td>" . $contravention->getNomProprio() . "</td>";
-                            echo "<td>" . $contravention->getNoPermit() . "</td>";
-                            echo "<td>" . $contravention->getNoPlaque() . "</td>";
-                            echo "<td>" . $contravention->getLieuContrav() . "</td>";
-                            echo "<td>" . $contravention->getArticle() . "</td>";
-                            echo "<td>" . $dateSimple . "</td>";
-                            echo "<td>" . $contravention->getHeure() . "</td>";
-                            echo "<td>" . $contravention->getNoAgent() . "</td>";
-                            echo "<td>" . $contravention->getNoMatricule() . "</td>";
-                            echo "<td><a href=rechercher_contrav.php?noViolation=" . htmlspecialchars($contravention->getNoViolation()) . ">Plus</a></td>";
-                            echo "</tr>";
-                        }
-                    } else { ?>
-                        <p>Aucune contravention n'est enregistrée</p>;
-                    <?php
-                    }
-                    ?>
-                    </tbody>
-                </table>
-            <?php } ?>
-</body>
+        ?>
+    </div>
 
+    <!-- Vendor JS Files -->
+    <script src="../../partials/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="../../partials/assets/js/main.js"></script>
+</body>
 </html>
