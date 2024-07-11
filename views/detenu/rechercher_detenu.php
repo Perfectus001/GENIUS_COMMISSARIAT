@@ -21,6 +21,15 @@
             margin-left: 250px; /* Ajuster la marge pour éviter le chevauchement avec la sidebar */
             padding: 20px;
         }
+        .card {
+            max-width: 600px; /* Réduire la largeur de la card */
+            margin: 20px auto; /* Centrer la card */
+        }
+        @media (max-width: 991.98px) {
+            .main-content {
+                margin-left: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -61,6 +70,28 @@
                                 ?>
                                 <p><strong>DATE ARRESTATION:</strong> <?= $dateSimple ?></p>
                             </div>
+                            <?php 
+                                $date = new DateTime($detenu->getDateArrestation());
+                                $dateSimple = $date->format('d-m-Y');
+
+                                $detArray = [
+                                    ''=>'',
+                                    'idDetenu' => $detenu->getCode(),
+                                    'nom'=> $detenu->getNom(),
+                                    'prenom'=> $detenu->getprenom(),
+                                    'cin_nif'=> $detenu->getCin_nif(),
+                                    'sexe'=> $detenu->getSexe(),
+                                    'adresse'=> $detenu->getAdresse(),
+                                    'telephone'=> $detenu->getTelephone(),
+                                    'infraction'=> $detenu->getInfraction(),
+                                    'statut'=> $detenu->getStatut(),
+                                    'codePrison'=> $detenu->getCodePrison(),
+                                    'dateArrestation'=> $detenu->getDateArrestation(),
+                                    'etat'=> $detenu->getEtat(),
+                                ];
+
+                                $queryString = http_build_query(['detenu' => $detArray]);
+                            ?>
 
                             <div class="mt-3">
                                 <a href="modifier_detenu.php?detenu=<?= $queryString ?>" class="btn btn-link">

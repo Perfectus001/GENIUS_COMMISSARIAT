@@ -53,7 +53,7 @@
 
         <?php if (isset($detenu)) { ?>
             <form method="post" action="../../controllers/detenuController.php">
-                <input type="hidden" name="idDetenu" value="<?= $detenu['idDetenu'] ?>">
+                <input type="hidden" name="idDetenu" value="<?= $detenu['idDetenu'] ?> ">
                 <div class="form-group col-12 mb-3">
                     <label for="nom">NOM</label>
                     <input type="text" class="form-control" name="nom" id="nom" value="<?php echo isset($detenu['nom']) ? htmlspecialchars($detenu['nom']) : ''; ?>">
