@@ -1,0 +1,44 @@
+/* Styles pour le corps de la page */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Conteneur principal pour centrer le contenu */
+.container {
+    max-width: 800px;
+    margin-left: 25%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Styles pour le contenu */
+.content {
+    margin-top: 20px;
+}
+
+.content p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+/* Styles pour les liens */
+.content a {
+    color: #007bff;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.content a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+/* Styles pour la sidebar */
+.sidebar {
+    margin-bottom: 20px;
+}

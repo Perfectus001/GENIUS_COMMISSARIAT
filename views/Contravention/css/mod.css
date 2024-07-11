@@ -1,0 +1,34 @@
+.container {
+    width: 70%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-left: 27%;
+}
+.container div {
+    display: flex;
+    flex-direction: column;
+}
+.container label {
+    margin-bottom: 5px;
+}
+.container input[type="text"],
+.container input[type="date"],
+.container input[type="time"] {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.container input[type="submit"] {
+    grid-column: span 2;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.container input[type="submit"]:hover {
+    background-color: #0056b3;
+}

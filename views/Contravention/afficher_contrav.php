@@ -23,6 +23,7 @@
             text-align: left;
         }
     </style>
+    <link rel="stylesheet" href="./css/recher.css">
        <link href="../../partials/assets/img/favicon.png" rel="icon">
     <link href="../../partials/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
     <!-- Google Fonts -->
